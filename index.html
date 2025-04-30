@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoEdit Pro - Blog Edit Video</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff0000;
+            --secondary-color: #9900cc;
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --card-bg: #1e1e1e;
+            --text-color: #f0f0f0;
+            --text-muted: #a0a0a0;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #ff66a5, #cc66ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('img/Edit\ Video.jfif') center/cover no-repeat;
+            padding: 100px 0;
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-title {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        .card-text {
+            color: var(--text-muted);
+        }
+        
+        .card-footer {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            color: white;
+        }
+        
+        .sidebar {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sidebar-heading {
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .list-group-item {
+            background-color: transparent;
+            border-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            padding: 0.75rem 1.25rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .list-group-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .tag-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: normal;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin: 2px;
+            display: inline-block;
+            font-size: 0.75rem;
+        }
+        
+        .footer {
+            background-color: var(--darker-bg);
+            color: var(--text-muted);
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-heading {
+            color: white;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: white;
+        }
+        
+        .newsletter-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .newsletter-input:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(255, 0, 102, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">VideoEdit<span class="text-light">Pro</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tutorials.html">Tutorials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tools.html">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2 bg-dark text-light border-secondary" type="search" placeholder="Search...">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">Kuasai Seni Edit Video</h1>
+            <p class="lead mb-4">Tutorial, tips, dan teknik edit video profesional untuk pemula hingga ahli</p>
+            <a href="#tutorials" class="btn btn-gradient btn-lg me-2">Pelajari Sekarang</a>
+            <a href="#tools" class="btn btn-outline-light btn-lg">Jelajahi Tools</a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Blog Posts (2 Column Layout) -->
+            <div class="col-lg-8">
+                <div class="row">
+                    <!-- Post 1 -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="/api/placeholder/600/300" class="card-img-top" alt="Tutorial Premiere Pro">
+                            <div class="card-body">
+                                <h5 class="card-title">10 Tips Editing Video di Adobe Premiere Pro untuk Pemula</h5>
+                                <p class="card-text">Pelajari dasar-dasar editing video dengan Adobe Premiere Pro untuk meningkatkan kualitas video Anda...</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="article.html" class="btn btn-gradient">Baca Selengkapnya</a>
+                                    <div class="text-muted small">
+                                        <i class="far fa-comment me-1"></i> 24
+                                        <i class="far fa-eye ms-2 me-1"></i> 1.2K
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <span><i class="far fa-calendar-alt me-2"></i> 28 Apr 2025</span>
+                                <span><i class="fas fa-user me-2"></i> Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 2 -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="/api/placeholder/600/300" class="card-img-top" alt="After Effects Tutorial">
+                            <div class="card-body">
+                                <h5 class="card-title">Membuat Visual Effects Cinematis dengan After Effects</h5>
+                                <p class="card-text">Tutorial lengkap cara membuat efek visual yang mengesankan untuk video Anda dengan Adobe After Effects...</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="article.html" class="btn btn-gradient">Baca Selengkapnya</a>
+                                    <div class="text-muted small">
+                                        <i class="far fa-comment me-1"></i> 18
+                                        <i class="far fa-eye ms-2 me-1"></i> 943
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <span><i class="far fa-calendar-alt me-2"></i> 25 Apr 2025</span>
+                                <span><i class="fas fa-user me-2"></i> Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 3 -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="/api/placeholder/600/300" class="card-img-top" alt="DaVinci Resolve">
+                            <div class="card-body">
+                                <h5 class="card-title">Color Grading Profesional dengan DaVinci Resolve</h5>
+                                <p class="card-text">Panduan lengkap cara melakukan color grading seperti profesional menggunakan DaVinci Resolve...</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="article.html" class="btn btn-gradient">Baca Selengkapnya</a>
+                                    <div class="text-muted small">
+                                        <i class="far fa-comment me-1"></i> 32
+                                        <i class="far fa-eye ms-2 me-1"></i> 1.5K
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <span><i class="far fa-calendar-alt me-2"></i> 20 Apr 2025</span>
+                                <span><i class="fas fa-user me-2"></i> Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 4 -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="/api/placeholder/600/300" class="card-img-top" alt="Audio Editing">
+                            <div class="card-body">
+                                <h5 class="card-title">Teknik Editing Audio untuk Video yang Lebih Berkualitas</h5>
+                                <p class="card-text">Pelajari cara meningkatkan kualitas audio dalam proyek video Anda dengan teknik mixing dan mastering profesional...</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="article.html" class="btn btn-gradient">Baca Selengkapnya</a>
+                                    <div class="text-muted small">
+                                        <i class="far fa-comment me-1"></i> 15
+                                        <i class="far fa-eye ms-2 me-1"></i> 876
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <span><i class="far fa-calendar-alt me-2"></i> 15 Apr 2025</span>
+                                <span><i class="fas fa-user me-2"></i> Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 5 -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="/api/placeholder/600/300" class="card-img-top" alt="Smartphone Editing">
+                            <div class="card-body">
+                                <h5 class="card-title">5 Aplikasi Edit Video Terbaik untuk Smartphone</h5>
+                                <p class="card-text">Review dan perbandingan aplikasi edit video terbaik yang bisa digunakan di smartphone Android dan iOS...</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="article.html" class="btn btn-gradient">Baca Selengkapnya</a>
+                                    <div class="text-muted small">
+                                        <i class="far fa-comment me-1"></i> 42
+                                        <i class="far fa-eye ms-2 me-1"></i> 2.1K
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <span><i class="far fa-calendar-alt me-2"></i> 10 Apr 2025</span>
+                                <span><i class="fas fa-user me-2"></i> Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 6 -->
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="/api/placeholder/600/300" class="card-img-top" alt="YouTube Editing">
+                            <div class="card-body">
+                                <h5 class="card-title">Cara Membuat Video YouTube yang Menarik Perhatian Viewers</h5>
+                                <p class="card-text">Tips dan trik edit video untuk YouTube agar konten Anda mendapatkan lebih banyak penonton dan engagement...</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="article.html" class="btn btn-gradient">Baca Selengkapnya</a>
+                                    <div class="text-muted small">
+                                        <i class="far fa-comment me-1"></i> 29
+                                        <i class="far fa-eye ms-2 me-1"></i> 1.7K
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <span><i class="far fa-calendar-alt me-2"></i> 5 Apr 2025</span>
+                                <span><i class="fas fa-user me-2"></i> Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <nav aria-label="Page navigation" class="mt-4 mb-5">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- About Widget -->
+                <div class="sidebar mb-4">
+                    <h4 class="sidebar-heading">Tentang Blog</h4>
+                    <p>VideoEditPro adalah blog tutorial dan tips edit video untuk pemula hingga profesional. Temukan berbagai tutorial, teknik, dan alat untuk meningkatkan keterampilan edit video Anda.</p>
+                    <a href="about.html" class="btn btn-gradient btn-sm">Selengkapnya</a>
+                </div>
+                
+                <!-- Popular Posts Widget -->
+                <div class="sidebar mb-4">
+                    <h4 class="sidebar-heading">Artikel Populer</h4>
+                    <div class="list-group list-group-flush">
+                        <a href="article.html" class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">10 Tips Editing Video di Adobe Premiere Pro</h6>
+                                <small class="text-muted">28 Apr 2025</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">1.2K</span>
+                        </a>
+                        <a href="article.html" class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Color Grading Profesional dengan DaVinci Resolve</h6>
+                                <small class="text-muted">20 Apr 2025</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">1.5K</span>
+                        </a>
+                        <a href="article.html" class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">5 Aplikasi Edit Video Terbaik untuk Smartphone</h6>
+                                <small class="text-muted">10 Apr 2025</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">2.1K</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Categories Widget -->
+                <div class="sidebar mb-4">
+                    <h4 class="sidebar-heading">Kategori</h4>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                            Premiere Pro
+                            <span class="badge bg-primary rounded-pill">12</span>
+                        </a>
+                        <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                            After Effects
+                            <span class="badge bg-primary rounded-pill">8</span>
+                        </a>
+                        <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                            DaVinci Resolve
+                            <span class="badge bg-primary rounded-pill">6</span>
+                        </a>
+                        <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                            Final Cut Pro
+                            <span class="badge bg-primary rounded-pill">4</span>
+                        </a>
+                        <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                            Mobile Editing
+                            <span class="badge bg-primary rounded-pill">7</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Tags Widget -->
+                <div class="sidebar mb-4">
+                    <h4 class="sidebar-heading">Tags</h4>
+                    <div class="pt-2">
+                        <a href="#" class="tag-badge">Premiere Pro</a>
+                        <a href="#" class="tag-badge">After Effects</a>
+                        <a href="#" class="tag-badge">DaVinci Resolve</a>
+                        <a href="#" class="tag-badge">Final Cut Pro</a>
+                        <a href="#" class="tag-badge">Color Grading</a>
+                        <a href="#" class="tag-badge">Visual Effects</a>
+                        <a href="#" class="tag-badge">Audio Editing</a>
+                        <a href="#" class="tag-badge">Mobile Editing</a>
+                        <a href="#" class="tag-badge">YouTube</a>
+                        <a href="#" class="tag-badge">Cinematic</a>
+                        <a href="#" class="tag-badge">Transitions</a>
+                        <a href="#" class="tag-badge">LUTs</a>
+                    </div>
+                </div>
+                
+                <!-- Newsletter Widget -->
+                <div class="sidebar">
+                    <h4 class="sidebar-heading">Newsletter</h4>
+                    <p>Berlangganan untuk mendapatkan update tutorial dan tips terbaru dari kami:</p>
+                    <form>
+                        <div class="mb-3">
+                            <input type="email" class="form-control newsletter-input" placeholder="Email Anda">
+                        </div>
+                        <button type="submit" class="btn btn-gradient w-100">Berlangganan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-heading">Tentang VideoEditPro</h5>
+                    <p>Blog tutorial dan tips edit video untuk meningkatkan keterampilan editing Anda dari pemula hingga profesional.</p>
+                    <div class="mt-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="footer-heading">Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="tutorials.html" class="footer-link">Tutorials</a></li>
+                        <li><a href="tools.html" class="footer-link">Tools</a></li>
+                        <li><a href="resources.html" class="footer-link">Resources</a></li>
+                        <li><a href="about.html" class="footer-link">About</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="footer-heading">Kategori</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="footer-link">Premiere Pro</a></li>
+                        <li><a href="#" class="footer-link">After Effects</a></li>
+                        <li><a href="#" class="footer-link">DaVinci Resolve</a></li>
+                        <li><a href="#" class="footer-link">Final Cut Pro</a></li>
+                        <li><a href="#" class="footer-link">Mobile Editing</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="footer-heading">Newsletter</h5>
+                    <p>Dapatkan tips dan tutorial edit video terbaru langsung ke inbox Anda:</p>
+                    <form class="mt-3">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control newsletter-input" placeholder="Email Anda">
+                            <button class="btn btn-gradient" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255, 255, 255, 0.1);">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 VideoEditPro. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="footer-link me-3">Privacy Policy</a>
+                    <a href="#" class="footer-link me-3">Terms of Service</a>
+                    <a href="#" class="footer-link">Cookies Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
